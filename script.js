@@ -15,5 +15,8 @@ function loadData(){
 
 function loadComplete(evt){
     quizData = JSON.parse(request.responseText);
-    console.log(quizData.results);
+    for(var i  = 0; i < 10; i++){
+        console.log(quizData.results[i]);
+        
+    }
 }
