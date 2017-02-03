@@ -1,7 +1,7 @@
 var request = new XMLHttpRequest();
 var genKnowledge = 'https://opentdb.com/api.php?amount=10&category=9&difficulty=medium&type=multiple';
 var videoGames = 'https://opentdb.com/api.php?amount=10&category=15&difficulty=medium&type=multiple';
-var history = 'https://opentdb.com/api.php?amount=10&category=23&difficulty=medium&type=multiple';
+var books = 'https://opentdb.com/api.php?amount=10&category=10&difficulty=medium&type=multiple';
 var film = 'https://opentdb.com/api.php?amount=10&category=11&difficulty=medium&type=multiple';
 var animals = 'https://opentdb.com/api.php?amount=10&category=27&difficulty=medium&type=multiple';
 var quizChoice;
@@ -26,7 +26,7 @@ function loadData(){
          console.log(quizNum)
          if(quizNum == 1){request.open('GET', genKnowledge);}
          else if(quizNum == 2){request.open('GET', videoGames);}
-         else if(quizNum == 3){request.open('GET', history);}
+         else if(quizNum == 3){request.open('GET', books);}
          else if(quizNum == 4){request.open('GET', film);}
          else if(quizNum == 5){request.open('GET', animals);}
          break;
@@ -36,8 +36,8 @@ function loadData(){
          case "gameQuiz":
             request.open('GET', videoGames);
          break;
-         case "historyQuiz":
-            request.open('GET', history);
+         case "bookQuiz":
+            request.open('GET', books);
          break;
          case "filmQuiz":
             request.open('GET', film);
