@@ -6,7 +6,6 @@ var film = 'https://opentdb.com/api.php?amount=10&category=11&difficulty=medium&
 var animals = 'https://opentdb.com/api.php?amount=10&category=27&difficulty=medium&type=multiple';
 var quizChoice;
 var quizNum = Math.floor(Math.random() * (6 - 1) + 1);
-document.cookie = "gk=N/A;vg=N/A;b=N/A;f=N/A;a=N/A;expires=";
 // window.onload = function(){
 //     var links = document.getElementsByTagName("a");
 //     var linkCount = links.length;
@@ -18,11 +17,18 @@ document.cookie = "gk=N/A;vg=N/A;b=N/A;f=N/A;a=N/A;expires=";
 
 
 getParameter();
-loadData();
 
-function loadData(){
-    console.log(document.cookie);
-    switch(quizChoice){
+window.onload = function loadData(){
+    if(document.location.href.indexOf("index.html") > -1){
+        document.getElementById("general").innerHTML = "<span>" + getCookie("gk") + "</span>";
+        document.getElementById("game").innerHTML = "<span>" + getCookie("vg") + "</span>";
+        document.getElementById("books").innerHTML = "<span>" + getCookie("b") + "</span>";
+        document.getElementById("film").innerHTML = "<span>" + getCookie("f") + "</span>";
+        document.getElementById("animal").innerHTML = "<span>" + getCookie("a") + "</span>";
+    }
+    if(document.location.href.indexOf("Quiz.html")>-1){
+
+        switch(quizChoice){
 
         case "randomQuiz":
          console.log(quizNum)
@@ -48,9 +54,28 @@ function loadData(){
             request.open('GET', animals);
          break;
          
+         
      }
      request.onload = loadComplete;
      request.send();
+    }
+     
+};
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
 }
 
 function getParameter(){
@@ -101,26 +126,67 @@ function checkScore(){
 
         case "randomQuiz":
          console.log(quizNum);
-         if(quizNum == 1){document.cookie = 'gk=' + totalScore + '';}
-         else if(quizNum == 2){document.cookie = 'vg=totalScore';}
-         else if(quizNum == 3){document.cookie = 'b=totalScore';}
-         else if(quizNum == 4){document.cookie = 'f=totalScore';}
-         else if(quizNum == 5){document.cookie = 'a=totalScore';}
+         if(quizNum == 1){if(totalScore < getCookie("gk")){
+                break;
+            }else{
+                document.cookie = 'gk='+totalScore+'';
+            }}
+         else if(quizNum == 2){if(totalScore < getCookie("vg")){
+                break;
+            }else{
+                document.cookie = 'vg='+totalScore+'';
+            }}
+         else if(quizNum == 3){if(totalScore < getCookie("b")){
+                break;
+            }else{
+                document.cookie = 'b='+totalScore+'';
+            }}
+         else if(quizNum == 4){if(totalScore < getCookie("f")){
+                break;
+            }else{
+                document.cookie = 'f='+totalScore+'';
+            }}
+         else if(quizNum == 5){if(totalScore < getCookie("a")){
+                break;
+            }else{
+                document.cookie = 'a='+totalScore+'';
+            }}
          break;
+         
          case "genQuiz":
-            document.cookie = 'gk='+totalScore+'';
+            if(totalScore < getCookie("gk")){
+                break;
+            }else{
+                document.cookie = 'gk='+totalScore+'';
+            }
          break;
          case "gameQuiz":
-            request.open('GET', videoGames);
+            if(totalScore < getCookie("vg")){
+                break;
+            }else{
+                document.cookie = 'vg='+totalScore+'';
+            }
          break;
          case "bookQuiz":
-            request.open('GET', books);
+            if(totalScore < getCookie("b")){
+                break;
+            }else{
+                document.cookie = 'b='+totalScore+'';
+            }
          break;
          case "filmQuiz":
-            request.open('GET', film);
+            if(totalScore < getCookie("f")){
+                break;
+            }else{
+                document.cookie = 'f='+totalScore+'';
+            }
          break;
          case "animalQuiz":
-            request.open('GET', animals);
+            if(totalScore < getCookie("a")){
+                break;
+            }else{
+                document.cookie = 'a='+totalScore+'';
+            }
          break;
          
      }
