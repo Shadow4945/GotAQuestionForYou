@@ -5,6 +5,8 @@ var books = 'https://opentdb.com/api.php?amount=10&category=10&difficulty=medium
 var film = 'https://opentdb.com/api.php?amount=10&category=11&difficulty=medium&type=multiple';
 var animals = 'https://opentdb.com/api.php?amount=10&category=27&difficulty=medium&type=multiple';
 var quizChoice;
+var quizNum = Math.floor(Math.random() * (6 - 1) + 1);
+document.cookie = "gk=N/A;vg=N/A;b=N/A;f=N/A;a=N/A;expires=";
 // window.onload = function(){
 //     var links = document.getElementsByTagName("a");
 //     var linkCount = links.length;
@@ -19,10 +21,10 @@ getParameter();
 loadData();
 
 function loadData(){
+    console.log(document.cookie);
     switch(quizChoice){
 
         case "randomQuiz":
-         var quizNum = Math.floor(Math.random() * (6 - 1) + 1);
          console.log(quizNum)
          if(quizNum == 1){request.open('GET', genKnowledge);}
          else if(quizNum == 2){request.open('GET', videoGames);}
@@ -92,7 +94,36 @@ function checkScore(){
     if(!(document.getElementById('q90').checked)){
         totalScore -= 1;
     }
-    console.log(totalScore);  
+    console.log(totalScore);
+    document.getElementById("userScore").innerHTML = "Your Score: " + totalScore;
+
+    switch(quizChoice){
+
+        case "randomQuiz":
+         console.log(quizNum);
+         if(quizNum == 1){document.cookie = 'gk=' + totalScore + '';}
+         else if(quizNum == 2){document.cookie = 'vg=totalScore';}
+         else if(quizNum == 3){document.cookie = 'b=totalScore';}
+         else if(quizNum == 4){document.cookie = 'f=totalScore';}
+         else if(quizNum == 5){document.cookie = 'a=totalScore';}
+         break;
+         case "genQuiz":
+            document.cookie = 'gk='+totalScore+'';
+         break;
+         case "gameQuiz":
+            request.open('GET', videoGames);
+         break;
+         case "bookQuiz":
+            request.open('GET', books);
+         break;
+         case "filmQuiz":
+            request.open('GET', film);
+         break;
+         case "animalQuiz":
+            request.open('GET', animals);
+         break;
+         
+     }
 }
 
 var questions = [10];
