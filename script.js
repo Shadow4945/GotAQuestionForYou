@@ -61,23 +61,29 @@ function getParameter(){
 }
 
 var questions = [10];
-var response; 
-var questionBegin = "";
-var questionEnd = "</div>" + "</br>"
+var response;
+var questionDis = ""; 
+var answerDis = "";
+// var questionBegin = "";
+// var questionEnd = "</div>" + "</br>";
 
 function loadComplete(evt){
     quizData = JSON.parse(request.responseText);
     for(var i  = 0; i < 10; i++){
         questions[i] = quizData.results[i].question;
         console.log(quizData.results[i]);
-        questionBegin += "<div>" + questions[i] + "</br>" + "</br>" + 
-        quizData.results[i].correct_answer + "</br>" +
-        quizData.results[i].incorrect_answers[0] + "</br>" + 
-        quizData.results[i].incorrect_answers[1] + "</br>" +
-        quizData.results[i].incorrect_answers[2] + "</br"  + "</br>" + 
-        questionEnd; 
+        questionDis += "<div>" + questions[i] + "</br> </br> </div> </br> "
+        answerDis += "<div>" + quizData.results[i].correct_answer + "</div>";
+
+        // questionBegin += "<div>" + questions[i] + "</br>" + "</br>" + 
+        // quizData.results[i].correct_answer + "</br>" +
+        // quizData.results[i].incorrect_answers[0] + "</br>" + 
+        // quizData.results[i].incorrect_answers[1] + "</br>" +
+        // quizData.results[i].incorrect_answers[2] + "</br"  + "</br>" + 
+        // questionEnd; 
     }
-    document.getElementById("QuestionDisplay").innerHTML = questionBegin;
+    document.getElementById("QuestionDisplay").innerHTML = questionDis;
+    document.getElementById("AnswerDisplay").innerHTML = answerDis;
 }
 
 
