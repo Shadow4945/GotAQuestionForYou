@@ -14,18 +14,23 @@ function loadData(){
 }
 
 var questions = [10];
-var answers = [4];
-var questionSet = "";
-var answerSet = ""; 
+var response; 
+var questionBegin = "";
+var questionEnd = "</div>" + "</br>"
 
 function loadComplete(evt){
     quizData = JSON.parse(request.responseText);
     for(var i  = 0; i < 10; i++){
         questions[i] = quizData.results[i].question;
-        questionSet += "<div>" + questions[i] + "</div>" + "</br>";
-        console.log(quizData.results[i]);   
+        console.log(quizData.results[i]);
+        questionBegin += "<div>" + questions[i] + "</br>" + "</br>" + 
+        quizData.results[i].correct_answer + "</br>" +
+        quizData.results[i].incorrect_answers[0] + "</br>" + 
+        quizData.results[i].incorrect_answers[1] + "</br>" +
+        quizData.results[i].incorrect_answers[2] + "</br"  + "</br>" + 
+        questionEnd; 
     }
-    document.getElementById("QuestionDisplay").innerHTML = questionSet;
+    document.getElementById("QuestionDisplay").innerHTML = questionBegin;
 }
 
 
