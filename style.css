@@ -46,7 +46,6 @@ header {
     
 }
 
-
 nav li {
     
     display: inline-block;
@@ -56,8 +55,6 @@ nav li {
     margin-right: 40px;
     padding: 5px;
     text-align: center;
-    
-    
 }
 a:link{
     color:#d5d5d5;
