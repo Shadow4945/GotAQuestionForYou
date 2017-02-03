@@ -60,6 +60,8 @@ function getParameter(){
     
 }
 
+
+
 var questions = [10];
 var questionBegin = "";
 var questionEnd = "</div>" + "</br>";
@@ -70,10 +72,10 @@ function loadComplete(evt){
         questions[i] = quizData.results[i].question;
         console.log(quizData.results[i]);
         questionBegin += "<div>" + questions[i] + "</br>" + "</br>" + 
-        quizData.results[i].correct_answer + "</br>" +
-        quizData.results[i].incorrect_answers[0] + "</br>" + 
-        quizData.results[i].incorrect_answers[1] + "</br>" +
-        quizData.results[i].incorrect_answers[2] + "</br"  + "</br>" + 
+        "<input type='radio' name='q" + i + "' value='" +quizData.results[i].correct_answer +"'>" + quizData.results[i].correct_answer + "</br>" +
+        "<input type='radio' name='q" + i + "' value='" +quizData.results[i].incorrect_answers[0] +"'>" + quizData.results[i].incorrect_answers[0] + "</br>" + 
+        "<input type='radio' name='q" + i + "' value='" +quizData.results[i].incorrect_answers[1] +"'>" + quizData.results[i].incorrect_answers[1] + "</br>" +
+        "<input type='radio' name='q" + i + "' value='" +quizData.results[i].incorrect_answers[2] +"'>" + quizData.results[i].incorrect_answers[2] + "</br"  + "</br>" + 
         questionEnd; 
     }
     document.getElementById("QuestionDisplay").innerHTML = questionBegin;
